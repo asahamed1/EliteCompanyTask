@@ -10,7 +10,8 @@ namespace EliteTask.Application.Services
 {
     public class PdfExportService: IPdfExportService
     {
-        public byte[] ExportToPdf(IEnumerable<AccountBalanceHistoryResultDto> data)
+        public byte[] ExportToPdf(AccountDetails
+         account, IEnumerable<BalanceHistoryDto> data)
         {
             using var memoryStream = new MemoryStream();
             var document = new iTextSharp.text.Document(PageSize.A4, 20, 20, 20, 20);
@@ -37,8 +38,8 @@ namespace EliteTask.Application.Services
 
             foreach (var item in data)
             {
-                table.AddCell(item.AccountId.ToString());
-                table.AddCell(item.AccountName);
+                table.AddCell(account.AccountId.ToString());
+                table.AddCell(account.AccountName);
                 table.AddCell(item.DebitAmount.ToString());
                 table.AddCell(item.CreditAmount.ToString());
                 table.AddCell(item.PreviousBalance.ToString());
@@ -47,11 +48,11 @@ namespace EliteTask.Application.Services
             }
             
             document.Add(new Paragraph("Total Debit", titleFont));
-            document.Add(new Paragraph(data.FirstOrDefault()?.TotalDebit.ToString())); // Empty line
+            document.Add(new Paragraph(data.LastOrDefault()?.TotalDebit.ToString())); // Empty line
             document.Add(new Paragraph("Total Credit", titleFont));
-            document.Add(new Paragraph(data.FirstOrDefault()?.TotalCredit.ToString())); // Empty line
+            document.Add(new Paragraph(data.LastOrDefault()?.TotalCredit.ToString())); // Empty line
             document.Add(new Paragraph("Total Final Balance", titleFont));
-            document.Add(new Paragraph(data.FirstOrDefault()?.FinalBalance.ToString())); // Empty line
+            document.Add(new Paragraph(data.LastOrDefault()?.FinalBalance.ToString())); // Empty line
 
             document.Add(table);
 

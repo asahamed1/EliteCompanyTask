@@ -36,6 +36,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 app.UseCors("AllowFrontend");
+app.UseStaticFiles(); // ? This enables serving files from wwwroot
+
+app.MapGet("/", async context =>
+{
+    context.Response.Redirect("/index.html");
+});
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

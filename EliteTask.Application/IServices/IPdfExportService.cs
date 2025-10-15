@@ -9,6 +9,7 @@ namespace EliteTask.Application.IServices
 {
     public interface IPdfExportService
     {
-     public byte[] ExportToPdf(IEnumerable<AccountBalanceHistoryResultDto> data);
+     public byte[] ExportToPdf( AccountDetails 
+         account,IEnumerable<BalanceHistoryDto> data);
     }
 }

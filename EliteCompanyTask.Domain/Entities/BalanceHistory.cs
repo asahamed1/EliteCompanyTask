@@ -40,6 +40,4 @@ public partial class BalanceHistory
     public int? BranchId { get; set; }
 
     public string? ReferenceNo { get; set; }
-
-    public virtual Balance? Balance { get; set; }
 }

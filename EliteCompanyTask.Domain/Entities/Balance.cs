@@ -46,6 +46,6 @@ public partial class Balance
     public string? Fixed { get; set; }
 
     public string? BLevel { get; set; }
-
-    public virtual ICollection<BalanceHistory> BalanceHistories { get; set; } = new List<BalanceHistory>();
 }
+
+

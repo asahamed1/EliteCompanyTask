@@ -17,9 +17,10 @@ namespace EliteTask.Application.Services
   
     public class ExcelExportService:IExcelExportService
     {
-        public byte[] ExportToExcel(IEnumerable<AccountBalanceHistoryResultDto> data)
-        {
-            ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+        public byte[] ExportToExcel(AccountDetails
+         account, IEnumerable<BalanceHistoryDto> data)
+        { 
+        ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
             using (var package = new ExcelPackage())
             {
                 var sheet = package.Workbook.Worksheets.Add("Account History");
@@ -46,17 +47,17 @@ namespace EliteTask.Application.Services
                 int row = 2;
                 foreach (var item in data)
                 {
-                    sheet.Cells[row, 1].Value = item.AccountId;
-                    sheet.Cells[row, 2].Value = item.AccountName;
+                    sheet.Cells[row, 1].Value = account.AccountId;
+                    sheet.Cells[row, 2].Value = account.AccountName;
                     sheet.Cells[row, 3].Value = item.DebitAmount;
                     sheet.Cells[row, 4].Value = item.CreditAmount;
                     sheet.Cells[row, 5].Value = item.PreviousBalance;
                     sheet.Cells[row, 6].Value = item.FinalBalance;
                     row++;
                 }
-                sheet.Cells[2, 10].Value = data.FirstOrDefault()?.TotalDebit;
-                sheet.Cells[2, 11].Value = data.FirstOrDefault()?.TotalCredit;
-                sheet.Cells[2, 12].Value = data.FirstOrDefault()?.TotalFinalBalance;
+                sheet.Cells[2, 10].Value = data.LastOrDefault()?.TotalDebit;
+                sheet.Cells[2, 11].Value = data.LastOrDefault()?.TotalCredit;
+                sheet.Cells[2, 12].Value = data.LastOrDefault()?.TotalFinal;
                 // Auto-fit columns
                 sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
 

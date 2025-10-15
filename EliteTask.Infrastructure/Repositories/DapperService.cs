@@ -34,7 +34,7 @@ namespace EliteTask.Infrastructure.Repositories
             return await connection.QueryAsync<T>(sql, param);
         }
 
-      
+       
 
         public async Task<dynamic> ExecuteAsync(string sql, object? param = null)
         {

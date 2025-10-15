@@ -9,6 +9,7 @@ namespace EliteTask.Application.IServices
 {
     public interface IExcelExportService
     {
-        byte[] ExportToExcel(IEnumerable<AccountBalanceHistoryResultDto> data);
+        byte[] ExportToExcel(AccountDetails
+         account, IEnumerable<BalanceHistoryDto> data);
     }
 }

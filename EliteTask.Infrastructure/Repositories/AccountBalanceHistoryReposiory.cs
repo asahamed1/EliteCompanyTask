@@ -24,6 +24,16 @@ namespace EliteTask.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<AccountDetails> GetAccount(int accountid)
+        {
+          return await   _context.Balances.Where(x => x.BalanceId == accountid).Select(x => new AccountDetails
+            {
+                AccountId = x.BalanceId,
+                AccountName = x.BalanceNameEn,
+                AccountType = x.BalanceType
+            }).FirstOrDefaultAsync();
+        }
+
         public async Task<List<AccountBalanceHistoryResultDto>> GetAccountHistoryRepository(int? balanceId, string fromDate, string toDate)
         {
             var balanceIdParam = new Microsoft.Data.SqlClient.SqlParameter("@BalanceId", balanceId ?? (object)DBNull.Value);

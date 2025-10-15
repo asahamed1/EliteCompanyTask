@@ -12,7 +12,7 @@ namespace EliteTask.Application.IServices
     public interface IBalanceService
     {
         public  Task <ResultViewModel<AccountNamePaginatedBalanceDto>> GetAllBalances(string query, int page = 1, int pageSize = 20);
-        public  Task<ResultViewModel<IEnumerable<AccountBalanceHistoryResultDto>>> GetAccountBalanceHistory(GetAccountBalanceHistoryModel model);
+        public Task<ResultViewModel<AccountBalanceHistoryResultDto>> GetAccountBalanceHistory(GetAccountBalanceHistoryModel model);
         public Task<byte[]> ExportBalanceHistory(GetAccountBalanceHistoryModel model);
         public Task<byte[]> ExportBalanceHistoryAsPDF(GetAccountBalanceHistoryModel model);
         public Task<ResultViewModel<BalancyHistoryDetails>> GetHistoryDetails(int id);
